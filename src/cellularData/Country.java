@@ -9,6 +9,15 @@ public class Country<LinkedList> {
 
 
     String name;
+
+    public Country getNext() {
+        return next;
+    }
+
+    public void setNext(Country next) {
+        this.next = next;
+    }
+
     Country next;
     cellularData.SubscriptionYear[] subscriptions;
     private int minYear;

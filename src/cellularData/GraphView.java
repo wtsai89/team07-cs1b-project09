@@ -13,4 +13,14 @@ public class GraphView extends LineChart{ //This is just a skeleton and the star
     public GraphView(NumberAxis xAxis, NumberAxis yAxis) {
         super(xAxis, yAxis);
     }
+    public Series seriesFromCountry(Country series){
+        return Series<xAxis,yAxis>;
+    }
+
+    public void update() {
+        this.seriesFromCountry(currentCountry);
+        this.getData().add(someSeries);
+    }
+
+
 }
