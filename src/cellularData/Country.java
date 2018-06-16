@@ -1,129 +1,148 @@
 package cellularData;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
-// Once it compiles Submit what I have.
-public class Country<LinkedList> {
-
-
-
-    String name;
-
-    public Country getNext() {
-        return next;
-    }
-
-    public void setNext(Country next) {
-        this.next = next;
-    }
-
-    Country next;
-    cellularData.SubscriptionYear[] subscriptions;
-    private int minYear;
-    private int maxYear;
-    int i = 0;
+/**
+ * Stores the entire subscription data for a single country
+ */
+public class Country {
+    private String name;
+    private LinkedList<SubscriptionYear> subscriptionsPerYear;
+    private int minYear, maxYear;
 
     /**
-     * The constructor that is supposed to pass in the name of the country
-     * @param name
+     *
+     * @param name sets the country name
      */
-    public Country(String name) {
-        this.minYear = 9999;
-        this.maxYear = 0;
+    public Country(String name)
+    {
         this.name = name;
-        subscriptions = new cellularData.SubscriptionYear[300];
-        Arrays.fill(subscriptions,new cellularData.SubscriptionYear(0,0.0));
-    }
-
-    public Country() {
-
+        subscriptionsPerYear = new LinkedList<>();
+        minYear = 9999;
+        maxYear = 0;
     }
 
     /**
-     * The getter method for the instance variable name.
+     * Creates a new SubscriptionYear object and saves it in subscriptions array
+     * @param year
+     * @param subscriptions
+     */
+    public void addSubscriptionYear(int year, double subscriptions)
+    {
+        subscriptionsPerYear.add(new SubscriptionYear(year, subscriptions));
+        if(year > maxYear)
+            maxYear = year;
+        if(year < minYear)
+            minYear = year;
+    }
+
+    /**
+     * accessor method for name
      * @return
      */
-    public String getName() {
-        return name;
-    }
-
-
-
-
-
-    public Country(Country parameterCountry, Country next) {
-        this.next = parameterCountry.next;
-        this.name = parameterCountry.name;
-    }
-
-
-
-   /* public String toString() {
-        for(name : next){
-            subscriptions =
-        }
-        return this.toString();*/
-
-    //}
+    public String getName() { return name; }
 
     /**
-     * A method used to add subscriptions to the link
-     * @param year
-     * @param subscription
+     * setter method for name
+     * @param name
      */
-    public void addSubscriptionYear(int year, double subscription) {
-        cellularData.SubscriptionYear s = new cellularData.SubscriptionYear(year, subscription);
+    public void setName(String name) { this.name = name; }
 
-        subscriptions[this.i++] = s;
-    }
+    /**
+     * accessor method for subscriptionsPerYear
+     * @return
+     */
+    public LinkedList<SubscriptionYear> getSubscriptions() { return subscriptionsPerYear; }
 
-    public double getNumSubscriptionsForPeriod(int startYear, int endYear) {
-        double sum = 0.0;
-        if (startYear > endYear) {
-            throw new IllegalArgumentException("Start year cannot be greater than end year.");
-        } else if (startYear < 1 | endYear < 1) {
-            throw new IllegalArgumentException("Year must be positive.");
-        } else {
-            Iterator s = new Iterator<cellularData.SubscriptionYear>() {
+    /**
+     * accessor method for minYear
+     * @return
+     */
+    public int getStartingYear() { return minYear; }
 
+    /**
+     * accessor method for maxYear
+     * @return
+     */
+    public int getEndingYear() { return maxYear; }
 
-                @Override
-                public boolean hasNext() {
-                    return false;
-                }
+    /**
+     * returns the total number of subscriptions between start and end years
+     * @param start
+     * @param end
+     * @return
+     */
+    public double getNumSubscriptionsForPeriod(int start, int end)
+    {
+        if(start > end)
+            throw new IllegalArgumentException("Error: Starting year and ending year are inverted.\n");
+        if((start > maxYear && end > maxYear) || (start < minYear && end < minYear))
+            throw new IllegalArgumentException("Error: Both starting year and ending year are out of range.\n");
 
-                @Override
-                public cellularData.SubscriptionYear next() {
-                    return null;
-                }
-            };
-            while(s.hasNext()){
-
-                s.next();
-            }
-
+        int validStart = start;
+        int validEnd = end;
+        int flag = 0;  //only display corrected range if there is a discrepancy
+        if (start < minYear) {
+            validStart = minYear;
+            flag = 1;
         }
+        if (end > maxYear) {
+            validEnd = maxYear;
+            flag = 1;
+        }
+        if (flag == 1)
+            System.out.printf("Illegal Argument Request of year range %d - %d. Valid period for %s is %d to %d\n", start, end, name, validStart, validEnd);
+
+        double sum = 0;
+        Iterator<SubscriptionYear> walker = subscriptionsPerYear.iterator();
+
+        for(int i = 0; i < validStart - minYear; i++) //find the start of the period
+            walker.next();
+
+        for(int i = 0; i <= validEnd - validStart; i++)  //iterate to specified end
+            sum += walker.next().getSubscriptions();
+
         return sum;
     }
 
     /**
-     * The toString method for this class.
+     * displays the country name and all of the subscriptions in a single formatted line
      * @return
      */
-    @Override
-    public String toString() {
-        return "Country{" +
-                "name='" + name + '\'' +
-                ", next=" + next +
-                ", subscriptions=" + Arrays.toString(subscriptions) +
-                ", minYear=" + minYear +
-                ", maxYear=" + maxYear +
-                ", i=" + i +
-                '}';
+    public String toString()
+    {
+        String s = String.format("%-25s", name);
+        for(SubscriptionYear sub : subscriptionsPerYear)
+            s += String.format("%7.2f", sub.getSubscriptions());
+
+        s += "\n";
+        return s;
     }
 
+    /**
+     * display the years in a single formatted line
+     * @return
+     */
+    public String yearString()
+    {
+        String s = String.format("%-25s", "");
+        for(int i = minYear; i <= maxYear; i++)
+            s+= String.format("%7d", i);
+        s += "\n";
+        return s;
+    }
 
+    /**
+     * If the countries' names are equal then return true
+     * @param data
+     * @return
+     */
+    public boolean equals(Object data)
+    {
+        Country country = (Country)data;
+        if(this.name.equals(country.getName()))
+            return true;
 
+        return false;
+    }
 }
-

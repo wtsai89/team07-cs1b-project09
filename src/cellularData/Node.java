@@ -1,117 +1,76 @@
 package cellularData;
 
+/**
+ * Node of the LinkedList class
+ */
 public class Node<T> {
-
-
-
-
-    Country country;
-    Node next;
-    T data;
-    Node head;
-    int count;
-
-    Node() {
-
-    }
+    private T data;
+    private Node next;
 
     /**
-     * Uses the iterator to pass in x as any type.
-     * @param x
-     */
-    public Node(T x) {
-        this.data = x;
-        this.next = null;
-    }
-
-    /**
-     * Gets the data and an object from Node.
+     * this node is not connected to another node
+     *
      * @param data
-     * @param n
      */
-    public Node(T data, Node n) {
+    public Node(T data) {
         this.data = data;
-        this.next = n;
+        next = null;
     }
-    /*8
-    Constructor that passes in country in the object Country.
+
+    /**
+     * this node is connected to another node
+     *
+     * @param data
+     * @param next
      */
-    public Node(Country country) {
-        this.country = country;
+    public Node(T data, Node next) {
+        this.data = data;
+        this.next = next;
     }
 
-    public Country getCountry() {
-        return country;
-    }
-
-
-    public Node getHead() {
-        return head;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
+    /**
+     * getter method for data
+     *
+     * @return
+     */
     public T getData() {
         return data;
     }
 
+    /**
+     * getter method for the next node
+     *
+     * @return
+     */
     public Node getNext() {
-
-        return this.next;
+        return next;
     }
 
+    /**
+     * setter method for the next node
+     *
+     * @param next
+     */
     public void setNext(Node next) {
         this.next = next;
     }
 
-
     /**
-     * @param country Uses the countries name to see where the node is supposed to go next.
-     * @return Return the name passed into the country
+     * setter method for data
+     *
+     * @param data
      */
-    public String nextCountry(String country) {
-        return country;
+    public void setData(T data) {
+        this.data = data;
     }
 
     /**
-     * The method for the name we're supposed to get.
-     * @return Supposed to get the next name in the file.
-     */
-
-    /**
-     * Supposed to be a method for all attributes.
-     */
-    public int size() {
-        int size = count;
-        return this.count;
-
-    }
-
-    public String toString(int count) {
-        String numberString = Integer.toString(count);
-        return numberString;
-    }
-
-
-    /**
-     * The String representation of Data
+     * data in String format
      *
      * @return
      */
-    @Override
     public String toString() {
-        return "Node{" +
-                "country=" + country +
-                ", next=" + next +
-                ", data=" + data +
-                ", head=" + head +
-                ", count=" + count +
-                '}';
+        return this.data.toString();
     }
-    /*public String toString() {
 
-        return this.toString();
-    }*/
 }
