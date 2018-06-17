@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 /**
  * Instantiates an JavaFX application which creates a model of the data.
  * Uses the model to instantiate an object of type  javafx.scene.chart.LineChart
- * via the cellularData.GraphView class. Then sets up the scene with basic modification to
+ * via the GraphView class. Then sets up the scene with basic modification to
  * the stage.
  *
  * @author Foothill College, [YOUR NAME HERE]
@@ -30,7 +30,7 @@ public class ChartGraph extends Application
 		
 		// Displays graph* of subscription rate by country.
 		// TODO: Define the view such that it takes the model as input.
-		//       Construct the x and y axis using a cellularData.NumberAxis, label the axis.
+		//       Construct the x and y axis using a NumberAxis, label the axis.
 		GraphView graphView = new GraphView(model);
 		
 		// TODO: Define update of the model such that:
@@ -55,7 +55,7 @@ public class ChartGraph extends Application
 		stage.setScene(scene);
 		
 		// Set the stage title
-		stage.setTitle("cellularData.GraphView Test");
+		stage.setTitle("GraphView Test");
 		
 		// Display the stage
 		stage.show();

@@ -58,4 +58,3 @@ public class SubscriptionYear {
      */
     public String toString() { return "" + subscriptions; }
 }
-
