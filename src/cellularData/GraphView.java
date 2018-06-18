@@ -14,7 +14,7 @@ public class GraphView extends LineChart{ //This is just a skeleton and the star
      * This is the constructor for this class.
      * @param model The parameter for the chart that is passed into this program.
      */
-    public GraphView(NumberAxis xAxis, NumberAxis yAxis, DataModel model){ //TODO:Need to work on this Method and set up the instance variables using super.
+    public GraphView(DataModel model){ //TODO:Need to work on this Method and set up the instance variables using super.
         super(new NumberAxis(), new NumberAxis());
         this.model = model;
         //requestChartLayout(); //I need to use the parameter but cannot quite figure out the method from the LineChart import yet.
