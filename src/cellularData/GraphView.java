@@ -16,6 +16,9 @@ public class GraphView extends LineChart{ //This is just a skeleton and the star
      */
     public GraphView(DataModel model){ //TODO:Need to work on this Method and set up the instance variables using super.
         super(new NumberAxis(), new NumberAxis());
+        this.getXAxis().setLabel("Year");
+        this.getXAxis().setAutoRanging(true);
+        this.getYAxis().setLabel("Subscription Rate");
         this.model = model;
         //requestChartLayout(); //I need to use the parameter but cannot quite figure out the method from the LineChart import yet.
 
