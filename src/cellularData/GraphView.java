@@ -5,8 +5,8 @@ import javafx.scene.chart.NumberAxis;
 import view.CountrySelector;
 
 public class GraphView extends LineChart{ //This is just a skeleton and the start of the program so that we have an idea of what this program is supposed to do.
-    NumberAxis xAxis;
-    NumberAxis yAxis;
+    final NumberAxis xAxis = new NumberAxis();
+    final NumberAxis yAxis = new NumberAxis();
     DataModel model;
     Country currentCountry;
     Series someSeries;
