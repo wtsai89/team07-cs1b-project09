@@ -10,14 +10,14 @@ public class GraphView extends LineChart{ //This is just a skeleton and the star
 //    final NumberAxis yAxis = new NumberAxis();
     //final LineChart<Number, Number> someSeries = new LineChart <Number, Number>(xAxis,yAxis);
     DataModel model;
+
     /**
      * This is the constructor for this class.
      * @param model The parameter for the chart that is passed into this program.
      */
     public GraphView(DataModel model){ //TODO:Need to work on this Method and set up the instance variables using super.
-        super(new NumberAxis(), new NumberAxis());
+        super(new NumberAxis(1960, 2014, 1), new NumberAxis());
         this.getXAxis().setLabel("Year");
-        this.getXAxis().setAutoRanging(true);
         this.getYAxis().setLabel("Subscription Rate");
         this.model = model;
         //requestChartLayout(); //I need to use the parameter but cannot quite figure out the method from the LineChart import yet.
