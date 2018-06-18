@@ -1,6 +1,7 @@
 package view;
 
 import cellularData.DataModel;
+import cellularData.GraphView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

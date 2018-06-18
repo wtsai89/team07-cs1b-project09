@@ -1,29 +1,44 @@
 package cellularData;
 
-import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-
-import javax.sound.sampled.Line;
+import view.CountrySelector;
 
 public class GraphView extends LineChart{ //This is just a skeleton and the start of the program so that we have an idea of what this program is supposed to do.
     NumberAxis xAxis;
     NumberAxis yAxis;
     DataModel model;
-    public GraphView(DataModel model){ //Need to work on this Method and set up the instance variables using super.
+    Country currentCountry;
+    Series someSeries;
+    /**
+     * This is the constructor for this class
+     * @param model The parameter for the chart that is passed into this program.
+     */
+    public GraphView(DataModel model){ //TODO:Need to work on this Method and set up the instance variables using super.
+        super(new NumberAxis(), new NumberAxis());
+        this.model = model;
+        //requestChartLayout(); //I need to use the parameter but cannot quite figure out the method from the LineChart import yet.
+    }
+
+    /**
+     * A method that takes in a country object as parameter and returns a series object. Its supposed to read from the series given and plot the points
+     * @param currentCountry This is the parameter for the country object.
+     * @return
+     */
+    public Series<Number, Number> seriesFromCountry(Country currentCountry){//TODO: We need to figure out how to pass in the parameter series into the number
+        Series<Number, Number> someSeries = new Series<>();
+        this.currentCountry = currentCountry;
+        return someSeries;
 
     }
-    public GraphView(NumberAxis xAxis, NumberAxis yAxis) { //Just what I came up with when I was initially trying to figure out the constructor.
-        super(xAxis, yAxis);
-    }
-    public Series seriesFromCountry(Country series){ //This needs to be set up correctly
-        //return Series<xAxis,yAxis>;
-    }
 
-    public void update() { //My current attempts at the update method. It needs the other methods before we can define this method.
-        //this.seriesFromCountry(currentCountry);
-        //this.getData().add(someSeries);
+    /**
+     * Updates the chart with the points plotted from the series given.
+     */
+    public void update() {
+        //getData();
+        this.seriesFromCountry(currentCountry);
+        this.getData().add(someSeries);
     }
 
 
