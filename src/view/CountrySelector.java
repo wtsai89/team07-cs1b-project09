@@ -12,7 +12,7 @@ public class CountrySelector
 	/**
 	 * Builds a linked list of random countries
 	 * @param allCountries      An array of Country objects
-	 * @param requestedNumber	The requested number of elements.
+	 * @param requestedSize	The requested number of elements.
 	 */
 	public CountrySelector(Country[] allCountries, int requestedSize)
 	{
