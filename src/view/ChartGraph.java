@@ -57,7 +57,7 @@ public class ChartGraph extends Application
 		
 		// Set the stage title
 		stage.setTitle("GraphView Test");
-		
+
 		// Display the stage
 		stage.show();
 	}
