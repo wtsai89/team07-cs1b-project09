@@ -5,6 +5,9 @@ import java.util.Random;
 import cellularData.Country;
 import cellularData.LinkedList;
 
+/**
+ * Creates a linked list of randomly selected countries
+ */
 public class CountrySelector 
 {
 	private LinkedList<Country> selectedCountries;

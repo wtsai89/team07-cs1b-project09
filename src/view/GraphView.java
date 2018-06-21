@@ -1,10 +1,17 @@
-package cellularData;
+package view;
 
+import cellularData.Country;
+import cellularData.DataModel;
+import cellularData.LinkedList;
+import cellularData.SubscriptionYear;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import view.CountrySelector;
 import javafx.scene.chart.XYChart;
 
+/**
+ * Creates a line chart of the data model
+ */
 public class GraphView extends LineChart{ //This is just a skeleton and the start of the program so that we have an idea of what this program is supposed to do.
 //    final NumberAxis xAxis = new NumberAxis();
 //    final NumberAxis yAxis = new NumberAxis();
@@ -16,8 +23,10 @@ public class GraphView extends LineChart{ //This is just a skeleton and the star
      * @param model The parameter for the chart that is passed into this program.
      */
     public GraphView(DataModel model){ //TODO:Need to work on this Method and set up the instance variables using super.
-        super(new NumberAxis(1960, 2014, 1), new NumberAxis());
-        this.getXAxis().setLabel("Year");
+        super(new NumberAxis(), new NumberAxis());
+        NumberAxis xAxis = (NumberAxis)this.getXAxis();
+        xAxis.setLabel("Year");
+        xAxis.setForceZeroInRange(false);
         this.getYAxis().setLabel("Subscription Rate");
         this.model = model;
         //requestChartLayout(); //I need to use the parameter but cannot quite figure out the method from the LineChart import yet.
@@ -45,7 +54,7 @@ public class GraphView extends LineChart{ //This is just a skeleton and the star
      */
     public void update() {
         //getData();
-        int size = 10;
+        int size = 5;
         Country[] countries = model.getCellularData();
         CountrySelector selector = new CountrySelector(countries,size);
         LinkedList<Country> selectCountries = selector.selectCountries();
